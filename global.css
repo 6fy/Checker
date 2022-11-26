@@ -1,0 +1,43 @@
+/* Variables */
+
+:root {
+	/* main */
+	--primairy-color: #F1842A;
+	--secondary-color: #CACACA;
+	--accent-color: #E9E9E9;
+	--window-color: #FAFAFA;
+	--code-background: #0F0E1D;
+
+	--row-gap: 15px;
+
+	--box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
+
+	/* borders */
+	--border-radius-large: 15px;
+	--border-radius-small: 8px;
+
+	/* text */
+	--l-text: 20px;
+	--m-text: 16px;
+	--s-text: 14px;
+}
+
+
+/* JSON */
+
+pre {
+	color: #fff;
+	background-color: var(--code-background);
+	padding: 5px; 
+	margin: 5px; 
+}
+
+.key { color: #15d41c; }
+.string { color: #eef765; }
+.number { color: #a85af2; }
+.boolean { color: #f27d00; }
+.null { color: #f20065; }
+.object { color: #6963e6; }
+.array { color: #38aef2; }
+.comma { color: #e8e8e8; }
+.syntax { color: #f5f2f2; }

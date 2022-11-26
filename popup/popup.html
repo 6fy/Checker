@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script src="popup.js" defer></script>
+	<link rel="stylesheet" href="popup.css">
+</head>
+<body>
+
+	<div class="main-pop-up">
+		<div class="title-holder">
+			<h1 class="title">POST</h1>
+			<button id="settings-btn" class="m-text">Settings</button>
+		</div>
+
+		<div class="game-input-holder">
+			<button class="preset-btn">Preset options</button>
+			<div class="select-holder">
+				<select name="game" id="game">
+				</select>
+			</div>
+		</div>
+
+		<div class="url-input-holder">
+			<label for="url">Post your URl</label>
+			<input type="text" name="url" id="url" placeholder="https://api.com/">
+
+			<label for="parameters">Type the URl parameters</label>
+			<input type="text" name="parameters" id="parameters" placeholder="v1/user/tag">
+		</div>
+		
+		<div class="fetch-btn-holder">
+			<button id="btn">Fetch URl</button>
+		</div>
+
+		<div class="data-output">
+			<pre id="log"></pre>
+		</div>
+	</div>
+
+</body>
+</html>
