@@ -216,8 +216,13 @@ presetButton.onclick = function()
 
 // Page load
 window.onload = async function() {
+    // add no game if people want their own url
+    let noGame = new URL("No Game", "", "");
+    Collection["NoGame"] = noGame;
+    addSelectOption(noGame);
+
     // get site and parameters from local storage
-    chrome.storage.sync.get(['site', 'parameters'], function(items) {
+    chrome.storage.sync.get(['site', 'parameters', 'savedCollection'], function(items) {
         if (items.site) {
             urlInput.value = items.site;
         }
@@ -227,13 +232,12 @@ window.onload = async function() {
         }
     });
 
-    // add no game if people want their own url
-    let noGame = new URL("No Game", "", "");
-    Collection["NoGame"] = noGame;
-    addSelectOption(noGame);
+    loadSavedCollection();
+}
 
-    // add urls to collection
-    chrome.storage.sync.get(['savedCollection'], function(items) {
+function loadSavedCollection()
+{
+    chrome.storage.sync.get('savedCollection', function(items) {
         let savedCollection = items.savedCollection;
 
         for (let key in savedCollection) {

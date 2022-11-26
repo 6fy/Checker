@@ -113,10 +113,10 @@ function addToCollection(obj)
         let removeBtn = document.getElementById(`remove-${obj._id}`);
 
         removeBtn.onclick = function() {
-            delete items.savedCollection[obj];
+            delete items.savedCollection[obj.name];
 
             chrome.storage.sync.set({'savedCollection': items.savedCollection}, function() {
-                console.log(`'savedCollection' saved with data: ${items.savedCollection}`);
+                console.log(`'savedCollection' saved with data: ${JSON.stringify(items.savedCollection)}`);
             });
 
             div.remove();
