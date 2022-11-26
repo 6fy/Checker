@@ -33,7 +33,7 @@ html, body {
 /* JSON */
 
 pre {
-	color: #fff;
+	color: #dedede;
 	background-color: var(--code-background);
 	padding: 5px; 
 	margin: 5px; 

@@ -87,8 +87,22 @@ button:hover {
 }
 
 .game-input-holder .select-holder #game {
-	width: 180px;
-	height: 20px;
+	width: 95%;
+	height: 32px;
+	border-radius: var(--border-radius-small);
+	box-shadow: var(--box-shadow);
+	border: 1px solid var(--secondary-color);
+	font-size: var(--s-text);
+}
+
+.game-input-holder .select-holder #game:hover {
+	cursor: pointer;
+}
+
+.game-input-holder .select-holder #game option {
+	background-color: var(--accent-color);
+	font-size: var(--s-text);
+	border-radius: var(--border-radius-small);
 }
 
 .url-input-holder {
