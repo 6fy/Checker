@@ -164,7 +164,7 @@ function saveUrl(obj)
 
 
 // On button click
-postButton.onclick = function()
+postButton.onclick = async function()
 {
     let obj = getCollection(optionInput.value);
 
@@ -174,20 +174,21 @@ postButton.onclick = function()
     }
 
     // disable postButton
-    let oldName = postButton.innerHTML;
-
-    let fakeBtn = postButton.cloneNode(true);
-    fakeBtn.id = "fake-btn";
-    fakeBtn.value = "Loading...";
-
-    postButton.parentNode.replaceChild(fakeBtn, postButton);
+    let fakeButton = document.getElementById('fake-btn');
+    postButton.style.display = "none";
+    fakeButton.style.display = "block";
 
     saveUrl(obj);
-    get(obj.getURL());
+    await get(obj.getURL());
 
     // enable postButton
-    fakeBtn.parentNode.replaceChild(postButton, fakeBtn);
-    postButton.value = oldName;
+    postButton.style.display = "block";
+    fakeButton.style.display = "none";
+
+    // reset input
+    optionInput.value = "No Game";
+    urlInput.value = "";
+    paramtersInput.value = "";
 }
 
 // On input change
