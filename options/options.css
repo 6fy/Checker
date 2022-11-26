@@ -1,0 +1,48 @@
+@import "../global.css";
+
+/* Default styling */
+
+button {
+	height: 35px;
+	width: 100px;
+	font-size: var(--s-text);
+	border-radius: var(--border-radius-small);
+	box-shadow: var(--box-shadow);
+	border: 2px solid var(--secondary-color);
+}
+
+button:hover {
+	cursor: pointer;
+	background-color: var(--primairy-color) !important;
+	color: #fff;
+	border: 1px solid var(--primairy-color) !important;
+	border-radius: var(--border-radius-small);
+	box-shadow: var(--box-shadow);
+	border: 2px solid var(--secondary-color);
+}
+
+.tag {
+    font-weight: bold;
+}
+
+/* Custom styling */
+
+.saved-object {
+    border:  1px solid var(--secondary-color);
+    margin-right: 5px;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+    width: 20%;
+    min-height: 200px;
+    border-radius: var(--border-radius-small);
+    font-size: var(--m-text);
+}
+
+#savedCollectionSet {
+    display: flex;
+    margin-top: 10px;
+}
+
+
+/* Sidebar */

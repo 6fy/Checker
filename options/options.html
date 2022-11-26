@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" href="./options.css">
+	<script src="./options.js" defer></script>
+</head>
+<body>
+
+<div>
+	<h2>Latest URL</h2>
+	<label for="url">URl</label>
+	<input type="text" name="url" id="latestUrl" placeholder="https://api.com/"> <br>
+
+	<label for="parameters">URl parameters</label>
+	<input type="text" name="parameters" id="latestParameters" placeholder="v1/user/tag">
+</div>
+
+<div>
+	<h2>Add URL</h2>
+	<label for="name">Name</label>
+	<input type="text" name="name" id="name" placeholder="Netflix"> <br>
+
+	<label for="url">URl</label>
+	<input type="text" name="url" id="url" placeholder="https://api.com/"> <br>
+
+	<label for="parameters">URl parameters</label>
+	<input type="text" name="parameters" id="parameters" placeholder="v1/user/tag"> <br>
+
+	<button id="add-btn">Add URL</button>
+</div>
+
+<div id="savedCollectionSet"></div>
+
+</body>
+</html>

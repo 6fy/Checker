@@ -23,6 +23,13 @@
 }
 
 
+/* Default styling */
+
+html, body {
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+
 /* JSON */
 
 pre {

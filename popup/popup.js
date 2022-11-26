@@ -1,6 +1,7 @@
 // Variables
 const postButton = document.getElementById("btn");
 const settingsButton = document.getElementById("settings-btn");
+const presetButton = document.getElementById("preset-btn");
 
 const optionInput = document.getElementById("game");
 const urlInput = document.getElementById("url");
@@ -204,6 +205,11 @@ optionInput.onchange = function()
 
 // Settings
 settingsButton.onclick = function()
+{
+    chrome.runtime.openOptionsPage();
+}
+
+presetButton.onclick = function()
 {
     chrome.runtime.openOptionsPage();
 }
