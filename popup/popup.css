@@ -38,6 +38,10 @@ button:hover {
 	display: none;
 }
 
+#old-fields {
+	display: none;
+}
+
 .title-holder {
 	display: flex;
 	align-items: center;
@@ -148,6 +152,17 @@ button:hover {
 	border-radius: var(--border-radius-small);
 	box-shadow: var(--box-shadow);
 	border: 2px solid var(--secondary-color);
+}
+
+.fetch-btn-holder #btn {
+	background-color: var(--primairy-color);
+	color: #fff;
+	border: 1px solid var(--primairy-color);
+}
+
+.fetch-btn-holder #btn:hover {
+	background-color: var(--accent-color) !important;
+	color: #000;
 }
 
 .data-output {

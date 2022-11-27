@@ -3,6 +3,10 @@ const postButton = document.getElementById("btn");
 const settingsButton = document.getElementById("settings-btn");
 const presetButton = document.getElementById("preset-btn");
 
+const clearFieldsButton = document.getElementById("clear-fields");
+const oldFieldsButton = document.getElementById("old-fields");
+const currentUrlButton = document.getElementById("current-url");
+
 const optionInput = document.getElementById("game");
 const urlInput = document.getElementById("url");
 const paramtersInput = document.getElementById("parameters");
@@ -215,6 +219,21 @@ presetButton.onclick = function()
     chrome.runtime.openOptionsPage();
 }
 
+clearFieldsButton.onclick = function()
+{
+    inputClearFields(true);
+}
+
+oldFieldsButton.onclick  = function()
+{
+    inputOldFields();
+}
+
+currentUrlButton.onclick = function()
+{
+    inputCurrentUrl();
+}
+
 // Page load
 window.onload = async function() {
     // add no game if people want their own url
@@ -258,4 +277,59 @@ function addSelectOption(obj)
     option.id = obj.getId();
 
     optionInput.add(option);
+}
+
+function inputClearFields(force)
+{
+    urlInput.value = "";
+    paramtersInput.value = "";
+
+    if (force) {
+        oldFieldsButton.style.display = "block";
+        clearFieldsButton.style.display = "none";
+    }
+}
+
+function inputOldFields()
+{
+    chrome.storage.sync.get(['site', 'parameters'], function(items) {
+        if (items.site) {
+            urlInput.value = items.site;
+        }
+
+        if (items.parameters) {
+            paramtersInput.value = items.parameters;
+        }
+    });
+
+    clearFieldsButton.style.display = "block";
+    oldFieldsButton.style.display = "none";
+}
+
+function inputCurrentUrl()
+{
+    inputClearFields(false);
+
+    chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+        let fullUrl = tabs[0].url;
+        let urlList = fullUrl.replace("https://", "").split("/");
+
+        if (urlList.length == 0) {
+            return;
+        }
+
+        if (urlList.length == 1) {
+            urlInput.value = urlList[0];
+            return;
+        }
+
+        let url = urlList[0];
+        let parameters = "";
+        for (let i = 1; i < urlList.length; i++) {
+            parameters += urlList[i] + "/";
+        }
+
+        urlInput.value = `https://${url}/`;
+        paramtersInput.value = parameters;
+    });
 }
