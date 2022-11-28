@@ -3,15 +3,21 @@ const postButton = document.getElementById("btn");
 const settingsButton = document.getElementById("settings-btn");
 const presetButton = document.getElementById("preset-btn");
 
+const copyUrlButton = document.getElementById("copy-url-btn");
+const lookupButton = document.getElementById("lookup-btn");
+const currentUrlButton = document.getElementById("current-url");
+
 const clearFieldsButton = document.getElementById("clear-fields");
 const oldFieldsButton = document.getElementById("old-fields");
-const currentUrlButton = document.getElementById("current-url");
+const clearLogButton = document.getElementById("clear-log-field");
 
 const optionInput = document.getElementById("game");
 const urlInput = document.getElementById("url");
 const paramtersInput = document.getElementById("parameters");
 
 const log = document.getElementById("log");
+const downloadLogButton = document.getElementById("download-log-btn");
+const copyLogButton = document.getElementById("copy-log-btn");
 
 
 // URl data
@@ -182,6 +188,8 @@ postButton.onclick = async function()
     postButton.style.display = "none";
     fakeButton.style.display = "block";
 
+    log.innerHTML = "";
+
     saveUrl(obj);
     await get(obj.getURL());
 
@@ -191,8 +199,7 @@ postButton.onclick = async function()
 
     // reset input
     optionInput.value = "No Game";
-    urlInput.value = "";
-    paramtersInput.value = "";
+    inputClearFields(true);
 }
 
 // On input change
@@ -232,6 +239,31 @@ oldFieldsButton.onclick  = function()
 currentUrlButton.onclick = function()
 {
     inputCurrentUrl();
+}
+
+copyUrlButton.onclick = function()
+{
+    copyUrl();
+}
+
+clearLogButton.onclick = function()
+{
+    clearLog();
+}
+
+lookupButton.onclick = function()
+{
+    lookUpUrl();
+}
+
+downloadLogButton.onclick = function()
+{
+    downloadLog();
+}
+
+copyLogButton.onclick = function()
+{
+    copyLog();
 }
 
 // Page load
@@ -279,18 +311,102 @@ function addSelectOption(obj)
     optionInput.add(option);
 }
 
-function inputClearFields(force)
+function clearLog()
+{
+    log.innerHTML = "";
+}
+
+function lookUpUrl()
+{
+    let url = getCollection("No Game");
+
+    if (url.getURL() == "/") {
+        log.innerHTML = "<span class=\"error\">No URL found</span>";
+        return;
+    }
+
+    chrome.tabs.create({url: url.getURL()});	
+}
+
+function copyUrl()
+{
+    let url = getCollection("No Game");
+    if (url.getURL() == "/") {
+        log.innerHTML = "<span class=\"error\">No URL found</span>";
+        return;
+    }
+
+    copyToClipboard(url.getURL());
+}
+
+function copyToClipboard(text) 
+{
+    var dummy = document.createElement("textarea");
+    document.body.appendChild(dummy);
+    dummy.value = text;
+    dummy.select();
+    document.execCommand("copy");
+    document.body.removeChild(dummy);
+}
+
+function copyLog()
+{
+    let text = log.innerText;
+    if (text == "") {
+        log.innerHTML = "<span class=\"error\">No Log found</span>";
+        return;
+    }
+
+    copyToClipboard(text);
+}
+
+function downloadLog()
+{
+    downloadLogButton.innerHTML = "Downloading...";
+    let text = log.innerText;
+    if (text == "") {
+        downloadLogButton.innerHTML = "Download Log";
+        log.innerHTML = "<span class=\"error\">Nothing to download!</span>";
+        return;
+    }
+
+    let filename = "log";
+    let extension = "txt";
+
+    if (parseJSON(text)) {
+        text = JSON.stringify(parseJSON(text), null, 4);
+        extension = "json";
+    }
+
+    download(`${filename}.${extension}`, text);
+    downloadLogButton.innerHTML = "Download Log";
+}
+
+function download(filename, text) {
+    var element = document.createElement('a');
+    element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+    element.setAttribute('download', filename);
+    
+    element.style.display = 'none';
+    document.body.appendChild(element);
+
+    element.click();
+
+    document.body.removeChild(element);
+}
+
+function inputClearFields(elem)
 {
     urlInput.value = "";
     paramtersInput.value = "";
 
-    if (force) {
+    if (elem) {
         oldFieldsButton.style.display = "block";
         clearFieldsButton.style.display = "none";
     }
 }
 
-function inputOldFields()
+function inputOldFields(change)
 {
     chrome.storage.sync.get(['site', 'parameters'], function(items) {
         if (items.site) {

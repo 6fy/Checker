@@ -26,20 +26,31 @@
 
 			<label for="parameters">Type the URl parameters</label>
 			<input type="text" name="parameters" id="parameters" placeholder="v1/user/tag">
+
+			<div class="input-btn-holder">
+				<button id="copy-url-btn">Copy URL in fields</button>
+				<button id="lookup-btn">Look up URL in a new tab</button>
+				<button id="current-url">Copy URL in open tab to input</button>
+			</div>
 		</div>
 		
 		<div class="fetch-btn-holder">
 			<button id="clear-fields">Clear fields</button>
 			<button id="old-fields">Old fields</button>
-			<button id="btn">Fetch URl</button>
+			<button id="btn">Fetch URL</button>
 			<button id="fake-btn">Loading...</button>
-			<button id="current-url">Current URl</button>
+			<button id="clear-log-field">Clear Log</button>
 		</div>
 
 		<div class="data-output">
 			<pre id="log"></pre>
 		</div>
-	</div>
 
+		<div class="download-btn-holder">
+			<button id="copy-log-btn">Copy Log</button>
+			<button id="download-log-btn">Download Log</button>
+		</div>
+
+	</div>
 </body>
 </html>

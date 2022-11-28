@@ -17,9 +17,10 @@
 	--border-radius-small: 8px;
 
 	/* text */
-	--l-text: 20px;
-	--m-text: 16px;
-	--s-text: 14px;
+	--l-text: 20px; /* large text */
+	--m-text: 16px; /* medium text */
+	--s-text: 14px; /* small text */
+	--t-text: 11px; /* tiny text */
 }
 
 
